@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './ShepStyle.css';
-import axios from 'axios'; // Import Axios for making HTTP requests
-import ShepherdLogo from './sheplogo.svg';
+import './ShepStyle.css'; // Your existing styles
+import UploadModal from './UploadModal'; // Import the modal
+import logo from './sheplogo.svg'; // Import logo
 
 function App() {
   const [messages, setMessages] = useState([
@@ -11,6 +11,21 @@ function App() {
     },
   ]);
   const [input, setInput] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false); // State for modal
+
+  const handleUploadClick = () => {
+    setModalOpen(true); // Open the modal when the button is clicked
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false); // Close the modal
+  };
+
+  const handleFileUpload = (file) => {
+    // Handle the file upload logic here
+    console.log("File uploaded:", file);
+    setModalOpen(false); // Close the modal after uploading the file
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,14 +33,7 @@ function App() {
     const userMessage = { text: input, sender: 'You' };
     setMessages([...messages, userMessage]);
 
-    try {
-      const response = await axios.post('http://localhost:5000/api/chat', { message: input });
-      const botMessage = { text: response.data.reply, sender: 'Shepherd' };
-      setMessages([...messages, userMessage, botMessage]);
-    } catch (error) {
-      console.error("There was an error communicating with the server!", error);
-    }
-
+    // Add your backend communication logic here
     setInput('');
   };
 
@@ -33,14 +41,17 @@ function App() {
     <div className="App">
       <div className="header">
         <h1>Shepherd AI</h1>
-        <button className="doc-upload-button">Doc Upload</button>
+        <button className="doc-upload-button" onClick={handleUploadClick}>
+          Doc Upload
+        </button>
       </div>
       <div className="chat-container">
         <div className="messages">
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender === 'Shepherd' ? 'bot' : 'user'}`}>
               <div className="sender-name">
-                {msg.sender === 'Shepherd' && <img src={ShepherdLogo} alt="Shepherd Logo" />}
+              {msg.sender === 'Shepherd' && <img src={logo} alt="Shepherd Logo" className="shepherd-logo" />}
+
                 {msg.sender}
               </div>
               <div className="message-text">{msg.text}</div>
@@ -57,10 +68,16 @@ function App() {
           <button type="submit"><span role="img" aria-label="search">🔍</span></button>
         </form>
       </div>
+
+      {/* Modal for uploading documents */}
+      <UploadModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onUpload={handleFileUpload}
+      />
     </div>
   );
 }
 
 export default App;
-
 
