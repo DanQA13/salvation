@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import './ShepStyle.css';
 import UploadModal from './UploadModal';
 import Sidebar from './Sidebar';
-import sheplogo from './sheplogo.svg'; // Make sure this path is correct
+import sheplogo from './sheplogo.svg'; // Ensure this path is correct
 
 function App() {
   const [messages, setMessages] = useState([
     {
       sender: 'Shepherd',
-      text: "Welcome, thank you for creating your free account. ",
+      text: "Welcome John, thank you for creating your free account. Before we continue please enter your location below.",
     },
   ]);
 
@@ -21,8 +21,11 @@ function App() {
   ]);
   const [currentConversation, setCurrentConversation] = useState(0);
 
+  const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
+
   const handleUploadClick = () => {
     setModalOpen(true); 
+    console.log("Modal Open State:", isModalOpen); // Add this line
   };
 
   const handleCloseModal = () => {
@@ -47,8 +50,13 @@ function App() {
     setInput('');
   };
 
+  // Toggle Dark Mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
-    <div className="App">
+    <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
       <div className="header">
         <div className="logo">
           <img src={sheplogo} alt="Shepherd Logo" className="shepherd-logo" />
@@ -57,6 +65,13 @@ function App() {
         <button className="doc-upload-button" onClick={handleUploadClick}>
           Doc Upload
         </button>
+
+        <div className="dark-mode-toggle">
+          <label className="switch">
+            <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
+            <span className="slider round"></span>
+          </label>
+        </div>
       </div>
 
       <div className="main-content">
@@ -101,8 +116,9 @@ function App() {
   );
 }
 
-export default App;
 
+
+export default App;
 
 
 

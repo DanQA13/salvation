@@ -1,33 +1,67 @@
+/* Shared styles for both dark mode and non-dark mode sidebars */
 .sidebar {
-    width: 250px;
-    background-color: #f1f1f1;
-    padding: 20px;
-    border-radius: 10px;
-    overflow-y: auto;
-    box-sizing: border-box;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .sidebar h2 {
-    margin-top: 0;
-    font-size: 1.2em;
-  }
-  
-  .conversation-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .conversation-list li {
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: #ffffff;
-    transition: background-color 0.2s;
-  }
-  
-  .conversation-list li:hover {
-    background-color: #e0e0e0;
-  }
-  
+  width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Non-dark mode specific styles */
+.sidebar {
+  background-color: #ffffff;
+}
+
+.sidebar h2 {
+  color: #000;
+  margin-top: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sidebar ul li {
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  list-style-type: none; /* Remove bullet points */
+  padding-left: 5; /* Remove any default padding */
+}
+
+.sidebar ul li:hover {
+  background-color: #e0e0e0; /* Slightly darken on hover */
+}
+
+.sidebar ul li.active {
+  background-color: #007bff; /* Highlight active conversation */
+  color: #fff;
+}
+
+/* Dark mode specific styles */
+.dark-mode .sidebar {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .sidebar h2 {
+  color: #fff;
+}
+
+.dark-mode .sidebar ul li {
+  background-color: #444; /* Slightly lighter background for list items */
+  color: #fff;
+  list-style-type: none; /* Remove bullet points */
+  padding-left: 5; /* Remove any default padding */
+}
+
+.dark-mode .sidebar ul li:hover {
+  background-color: #555; /* Darken on hover */
+}
+
+.dark-mode .sidebar ul li.active {
+  background-color: #007bff; /* Highlight active conversation */
+  color: #fff;
+}

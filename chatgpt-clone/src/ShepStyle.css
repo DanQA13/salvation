@@ -1,182 +1,255 @@
-/* Main App container */
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
 .App {
-  display: flex;                /* Flex container to align elements */
-  flex-direction: column;       /* Arrange elements in a vertical column */
-  height: 100vh;                /* Full viewport height */
-  padding: 10px 40px;           /* Adjust padding to move closer to the edges */
-  box-sizing: border-box;       /* Ensure padding is included in the element's total width and height */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-/* Main content container */
-.main-content {
-  display: flex;                /* Add flex display for main content */
-  flex-grow: 1;                 /* Let main content grow to fill available space */
-  margin-top: 20px;             /* Add some space between the header and main content */
+.dark-mode {
+  background-color: #1e1e1e;
+  color: #ffffff;
 }
 
-/* Header styling */
 .header {
   display: flex;
-  justify-content: space-between; /* Space between logo and upload button */
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;            /* Match the border radius of the chat container */
-  width: 100%;                    /* Make the header span the full width of the container */
-  max-width: none;                /* Remove max-width restriction */
-  box-sizing: border-box;         /* Ensure padding and width are handled correctly */
-}
-.shepherd-text {
-  font-weight: bold;    /* Makes the text bold */
-  font-size: 1.5rem;    /* Sets the font size to 1.5rem */
-  margin-left: 10px;    /* Adds space between the logo and the text */
-  vertical-align: middle; /* Aligns the text with the logo */
-}
-
-
-/* Shepherd logo styling */
-.shepherd-logo {
-  width: 30px; /* Adjust the size as needed */
-  margin-right: 10px; /* Space between the logo and the text */
-  vertical-align: middle; /* Align it properly with the text */
-}
-.shepherd-logo-small {
-  width: 20px; /* Smaller size for use in chat bubbles */
-  vertical-align: middle;
-}
-
-/* Doc Upload button styling */
-.doc-upload-button {
-  background-color: #5A5FCF;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  max-width: 150px;               /* Ensure the button doesn't exceed a reasonable width */
-  text-align: center;             /* Center the text within the button */
-}
-
-.doc-upload-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Sidebar styling */
-.sidebar {
-  width: 250px;
-  background-color: #f1f1f1;
   padding: 20px;
-  border-radius: 10px;
-  overflow-y: auto;
-  box-sizing: border-box;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar h2 {
-  margin-top: 0;
-  font-size: 1.5em;
-}
-
-.conversation-list {
-  list-style: none;
-  padding: 0;
-}
-
-.conversation-list li {
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-bottom: 10px;
   background-color: #ffffff;
-  transition: background-color 0.2s;
+  border-bottom: 1px solid #ccc;
 }
 
-.conversation-list li:hover {
-  background-color: #e0e0e0;
+.dark-mode .header {
+  background-color: #2a2a2a;
 }
 
-/* Chat container styling */
-.chat-container {
-  display: flex;                /* Flex container to align messages and input form */
-  flex-direction: column;       /* Arrange messages and input form in a column */
-  justify-content: space-between; /* Space between messages and input form */
-  flex-grow: 1;                 /* Allow the container to fill remaining space */
-  padding: 10px 20px;           /* Adjust padding inside the chat container */
-  box-sizing: border-box;
-  background: #f9f9f9;          /* Background color for the chat area */
-  border-radius: 10px;          /* Rounded corners for the chat area */
-  margin-left: 20px;            /* Add some margin on the left side */
+.logo {
+  display: flex;
+  align-items: center;
 }
 
-/* Messages area styling */
-.messages {
-  flex-grow: 1;                 /* Allows messages area to expand to fill space */
-  overflow-y: auto;             /* Adds vertical scrolling if needed */
-  margin-bottom: 20px;
-}
-
-/* Individual message styling */
-.message {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #F5F5F5;
-  max-width: 70%;
-}
-
-.message.bot {
-  align-self: flex-start; /* Align bot messages to the left */
-}
-
-.message.user {
-  align-self: flex-end; /* Align user messages to the right */
-  background-color: #5A5FCF;
-  color: white;
-}
-
-/* Sender name styling */
-.sender-name {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-/* Input form styling */
-.input-form {
-  display: flex;                /* Flex container for input and button */
-  align-items: center;          /* Align items vertically in the center */
-  padding: 10px;
-  box-sizing: border-box;
-  border-top: 1px solid #ddd;   /* Adds a top border to separate from messages */
-  background: white;            /* Ensure background is white */
-  border-radius: 20px;          /* Rounded corners for the input form */
-}
-
-/* Input field styling */
-.input-form input[type="text"] {
-  flex-grow: 1;                 /* Allow input field to expand and fill available space */
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
+.shepherd-logo {
+  height: 30px;
   margin-right: 10px;
 }
 
-/* Submit button styling */
-.input-form button {
-  background-color: #5A5FCF;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+.shepherd-text {
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
-.input-form button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.dark-mode .shepherd-text {
+  color: #ffffff;
 }
+
+.doc-upload-button {
+  background-color: #6c63ff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.doc-upload-button:hover {
+  background-color: #5b54e0;
+}
+
+.dark-mode .doc-upload-button {
+  background-color: #3b3ba1;
+}
+
+.dark-mode .doc-upload-button:hover {
+  background-color: #2a2a8a;
+}
+
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #6c63ff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+.dark-mode .main-content {
+  background-color: #1e1e1e;
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dark-mode .chat-container {
+  background-color: #2a2a2a;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  margin-bottom: 20px;
+}
+
+.message.bot {
+  text-align: left;
+}
+
+.message.user {
+  text-align: right;
+}
+
+.sender-name {
+  font-weight: bold;
+}
+
+.shepherd-logo-small {
+  height: 20px;
+  vertical-align: middle;
+}
+
+.input-form {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.dark-mode .input-form {
+  background-color: #3a3a3a;
+}
+
+.input-form input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.input-form button {
+  background-color: #6c63ff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+.dark-mode input::placeholder {
+  color: #bbb;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 20%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.dark-mode .sidebar {
+  background-color: #2a2a2a;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.convo-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dark-mode .convo-item {
+  background-color: #3a3a3a;
+}
+
+.convo-item:hover {
+  background-color: #e0e0e0;
+}
+
+.dark-mode .convo-item:hover {
+  background-color: #4a4a4a;
+}
+
 
 

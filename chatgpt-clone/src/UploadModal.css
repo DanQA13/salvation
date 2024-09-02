@@ -22,11 +22,11 @@
     width: 100%;
     text-align: center;
   }
-  
+
   .modal-content h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #000000;
   }
   
   .modal-content input[type="file"] {
@@ -48,3 +48,34 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   
+    /* Dark mode styles */
+.dark-mode .modal-content {
+  background-color: #333; /* Dark background for modal in dark mode */
+  color: #fff; /* Light text color for dark mode */
+}
+
+.dark-mode .close-button {
+  background-color: #5A5FCF; /* Dark background for the close button in dark mode */
+  color: #fff; /* Light text color for dark mode */
+}
+
+.dark-mode input[type="file"] {
+  padding-left: 5;
+  background-color: #444; /* Dark background for file input */
+  color: #fff; /* Light text color for dark mode */
+}
+
+.dark-mode input[type="file"]::file-selector-button {
+  padding-left: 5;
+  background-color: #555; /* Dark background for file selector button */
+  color: #fff; /* Light text color for dark mode */
+}
+
+.dark-mode .close-button:hover {
+  background-color: #555; /* Darken button on hover */
+}
+  
+ .dark-mode .modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #fff;}
