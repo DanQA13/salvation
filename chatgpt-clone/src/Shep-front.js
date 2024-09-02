@@ -1,30 +1,41 @@
 import React, { useState } from 'react';
-import './ShepStyle.css'; // Your existing styles
-import UploadModal from './UploadModal'; // Import the modal
-import logo from './sheplogo.svg'; // Import logo
+import './ShepStyle.css';
+import UploadModal from './UploadModal';
+import Sidebar from './Sidebar';
+import sheplogo from './sheplogo.svg'; // Make sure this path is correct
 
 function App() {
   const [messages, setMessages] = useState([
     {
       sender: 'Shepherd',
-      text: "Welcome John, thank you for creating your free account. Before we continue please enter your location below. This will allow me to provide a more accurate price prediction based on the market in your area."
+      text: "Welcome, thank you for creating your free account. ",
     },
   ]);
+
   const [input, setInput] = useState('');
-  const [isModalOpen, setModalOpen] = useState(false); // State for modal
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [conversations, setConversations] = useState([
+    { title: 'Conversation 1' },
+    { title: 'Conversation 2' },
+    { title: 'Conversation 3' },
+  ]);
+  const [currentConversation, setCurrentConversation] = useState(0);
 
   const handleUploadClick = () => {
-    setModalOpen(true); // Open the modal when the button is clicked
+    setModalOpen(true); 
   };
 
   const handleCloseModal = () => {
-    setModalOpen(false); // Close the modal
+    setModalOpen(false); 
   };
 
   const handleFileUpload = (file) => {
-    // Handle the file upload logic here
     console.log("File uploaded:", file);
-    setModalOpen(false); // Close the modal after uploading the file
+    setModalOpen(false); 
+  };
+
+  const handleSelectConversation = (index) => {
+    setCurrentConversation(index);
   };
 
   const handleSubmit = async (e) => {
@@ -33,51 +44,65 @@ function App() {
     const userMessage = { text: input, sender: 'You' };
     setMessages([...messages, userMessage]);
 
-    // Add your backend communication logic here
     setInput('');
   };
 
   return (
     <div className="App">
       <div className="header">
-        <h1>Shepherd AI</h1>
+        <div className="logo">
+          <img src={sheplogo} alt="Shepherd Logo" className="shepherd-logo" />
+          <span className="shepherd-text">Shepherd AI</span>
+        </div>
         <button className="doc-upload-button" onClick={handleUploadClick}>
           Doc Upload
         </button>
       </div>
-      <div className="chat-container">
-        <div className="messages">
-          {messages.map((msg, index) => (
-            <div key={index} className={`message ${msg.sender === 'Shepherd' ? 'bot' : 'user'}`}>
-              <div className="sender-name">
-              {msg.sender === 'Shepherd' && <img src={logo} alt="Shepherd Logo" className="shepherd-logo" />}
 
-                {msg.sender}
+      <div className="main-content">
+        <Sidebar 
+          conversations={conversations} 
+          onSelectConversation={handleSelectConversation} 
+        />
+        <div className="chat-container">
+          <div className="messages">
+            {messages.map((message, index) => (
+              <div key={index} className={`message ${message.sender === 'You' ? 'user' : 'bot'}`}>
+                <div className="sender-name">
+                  {message.sender === 'Shepherd' ? (
+                    <img src={sheplogo} alt="Shepherd Logo" className="shepherd-logo-small" />
+                  ) : (
+                    'You'
+                  )}
+                </div>
+                <div>{message.text}</div>
               </div>
-              <div className="message-text">{msg.text}</div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <form className="input-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="What can I help you with?"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <button type="submit">
+              <span role="img" aria-label="send">🔍</span>
+            </button>
+          </form>
         </div>
-        <form onSubmit={handleSubmit} className="input-form">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="City, State"
-          />
-          <button type="submit"><span role="img" aria-label="search">🔍</span></button>
-        </form>
       </div>
 
-      {/* Modal for uploading documents */}
-      <UploadModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onUpload={handleFileUpload}
-      />
+      {isModalOpen && (
+        <UploadModal onClose={handleCloseModal} onUpload={handleFileUpload} />
+      )}
     </div>
   );
 }
 
 export default App;
+
+
+
 
